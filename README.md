@@ -1,2 +1,9 @@
 # CHARTJS_Examples
-Sandbox of Data Visualization for Stock Data combined with Transaction Data, and ai metadata.
+
+Data Visualization for Stock Data, encoded/decoded, and combined with Transaction MetaData, with mathematical calculation - to result in ai inference engine.
+
+<hr>
+
+LIVE LINK: 
+
+Chart.js example released under MIT. ~ : )
