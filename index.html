@@ -26,7 +26,17 @@ body{background:black; color:steelblue; font-family:Verdana, Geneva, Tahoma, san
 }
 .MinMaxBTN{color:aqua;background:black;border:solid 1px seagreen;
     width: 1.444em;text-align: center;border-radius: 50%;box-shadow: 1px 1px 1px teal;
-    position:absolute;right:8%; top:10%;cursor:pointer;
+    position:absolute;
+    /* right:8%; top:10%; */
+    right:7%; top:90px;
+    cursor:pointer;
+}
+.MinMaxBTN2{color:aqua;background:black;border:solid 1px seagreen;
+    width: 1.444em;text-align: center;border-radius: 50%;box-shadow: 1px 1px 1px teal;
+    position:absolute;
+    /* right:8%; top:10%; */
+    right:8%; top:10%;
+    cursor:pointer;
 }
 .expandCollapseBTN2{color:aqua;background:black;border:solid 1px seagreen;
     width: 1.444em;text-align: center;border-radius: 50%;box-shadow: 1px 1px 1px teal;
@@ -34,94 +44,58 @@ body{background:black; color:steelblue; font-family:Verdana, Geneva, Tahoma, san
 }
 .expandCollapseBTN2:hover{color:cyan;background:darkblue;border:solid 1px teal;}
 .expandCollapseBTN2:active{color:cyan;background:darkslategrey;border:solid 1px teal;}
+
+/* #scrollFrame{width: 88%; padding-top:2.666%}   */
+/*  custom scroll bar */
+.scrollBarV {height:97%; overflow-x:scroll; background:#010111;}
+.scrollBarV::-webkit-scrollbar-track { background-color: #010213;  border-radius: 13px; }
+.scrollBarV::-webkit-scrollbar { width: 1.222em; height: 100%;  }
+.scrollBarV::-webkit-scrollbar-thumb { background-color: #04223c; border-radius: 13px;
+background-image: -webkit-linear-gradient(0deg, rgba(53, 90, 184, 0.6) 26%, transparent 26%, transparent 51%, rgba(255, 255, 255, -0.4) 51%, rgba(255, 255, 255, 0.6) 74%, transparent 74%, transparent);
+}
+
 </style>
 </head>
-<body>
+<body class="scrollBarV">
 <article style="border:solid 1px darkblue; border-radius:22px;
-padding:1%; margin:1%;box-shadow: inset 0px 0px 4px 0px cyan;">
+padding:0.444em; margin:0.222em;box-shadow: inset 0px 0px 4px 0px cyan;">
     <h1 style="font-size:0.888em; border:solid 1px purple;border-radius:22px;
-        padding:1%; margin:1%;box-shadow: 1px 1px 1px blue;">
-        Chart.js | Advanced Financial Visualization | ai</h1>
+        padding:1em; margin:1%;box-shadow: 1px 1px 1px blue;">
+        Chart.js | Advanced_Financial_Vis | for ai_timeseries</h1>
     
-        <aside  id="chartMaxMinBTN" class="MinMaxBTN" onclick="minMaxExpandCollapseClick()"
+    <aside  id="chartMaxMinBTN" class="expandCollapseBTN2 MinMaxBTN2" onclick="minMaxExpandCollapseClick()"
         >✴</aside>
-    <section style="width:100%;">
-        <!-- <div style="float:right;margin-right: 21px;
-        margin-bottom: -24px;"> -->
-            <!-- <div>xxx</div> -->
-        <!-- </div> -->
-        <canvas id="finChart" style="font-size:0.888em; border:solid 1px limegreen; border-radius:22px;
-        padding:1%; margin:1%;box-shadow: inset -1px -1px 2px 1px steelblue;"></canvas>
-    </section>
-    <header class="expanderROW">Query:
+    <canvas id="finChart" style="font-size:0.888em; border:solid 1px limegreen; border-radius:22px;
+    padding:1em; margin:0.222em;box-shadow: inset -1px -1px 2px 1px steelblue;"></canvas>
+    <header class="expanderROW">TKR_Query:
         <aside  id="queryVIEWBTN" class="expandCollapseBTN2" onclick="queryExpandCollapseClick()"
             >✴</aside>
     </header>
     <section id="queryVIEW" style="font-size:0.888em; border:solid 1px cyan; border-radius:22px;
     padding:3%; margin:2%; line-height: 2.888em;">
-        Bar Type:
-        <select id="type1" class="chartSELECTOR">
-            <option value="candlestick" selected>Candlestick</option>
-            <option value="ohlc">OHLC</option>
+        <select id="tkrSelect1" class="chartSELECTOR">
+            <option value="true" selected>NVDA</option>
+            <option value="false">AMZN</option>
+            <option value="false">COIN</option>
         </select>
-        Scale Type:
-        <select id="scale-type1" class="chartSELECTOR">
-            <option value="linear" selected>Linear</option>
-            <option value="logarithmic">Logarithmic</option>
-        </select>
-        Color Scheme:
-        <select id="color-scheme1" class="chartSELECTOR">
-            <option value="muted">Muted</option>
-            <option value="neon" selected>Neon</option>
-        </select>
-        Border:
-        <select id="border1" class="chartSELECTOR">
-            <option value="true" selected>Yes</option>
-            <option value="false">No</option>
-        </select>
-        Mixed:
-        <select id="mixed1" class="chartSELECTOR">
-            <option value="true">Yes</option>
-            <option value="false" selected>No</option>
-        </select>
-        <button id="update1" class="chartBTN">Update</button>
-        <button id="randomizeData1" class="chartBTN">Randomize Data</button>
+        <button id="getDataBTN" disabled class="chartBTN">Get_DATA</button>
+        <button id="importTXNZBTN" disabled class="chartBTN">Enter_TXNZ</button>
     </section>
-    <header class="expanderROW">Metadata:
+    <header class="expanderROW">TKR_Metadata:
         <aside  id="metadataVIEWBTN" class="expandCollapseBTN2" onclick="metadataExpandCollapseClick()"
             >✴</aside>
     </header>
-    <section id="metadataVIEW" style="font-size:0.888em; border:solid 1px cyan; border-radius:22px;
+    <section id="metadataVIEW" style="font-size:0.888em; 
+    border:solid 1px cyan; border-radius:22px;
     padding:3%; margin:2%; line-height: 2.888em;">
-        Bar Type:
-        <select id="type2" class="chartSELECTOR">
-            <option value="candlestick" selected>Candlestick</option>
-            <option value="ohlc">OHLC</option>
-        </select>
-        Scale Type:
-        <select id="scale-type2" class="chartSELECTOR">
-            <option value="linear" selected>Linear</option>
-            <option value="logarithmic">Logarithmic</option>
-        </select>
-        Color Scheme:
-        <select id="color-scheme2" class="chartSELECTOR">
-            <option value="muted" selected>Muted</option>
-            <option value="neon">Neon</option>
-        </select>
-        Border:
-        <select id="border2" class="chartSELECTOR">
-            <option value="true" selected>Yes</option>
-            <option value="false">No</option>
-        </select>
-        Mixed:
-        <select id="mixed2" class="chartSELECTOR">
-            <option value="true">Yes</option>
-            <option value="false" selected>No</option>
-        </select>
-        <button id="update2" class="chartBTN">Update</button>
-        <button id="randomizeData2" class="chartBTN">Randomize Data</button>
+        Month NET:
+        <input id="type2" class="chartSELECTOR"></input>
+        AVG AMT:
+        <input id="scale-type2" class="chartSELECTOR"></input>
+        GAIN %:
+        <input id="color-scheme2" class="chartSELECTOR"></input>
     </section>
-    <header class="expanderROW">Config:
+    <header class="expanderROW">TKR_Config:
         <aside  id="configVIEWBTN" class="expandCollapseBTN2" onclick="configExpandCollapseClick()"
         >✴</aside>
     </header>
@@ -152,18 +126,26 @@ padding:1%; margin:1%;box-shadow: inset 0px 0px 4px 0px cyan;">
             <option value="true" selected>Yes</option>
             <option value="false" >No</option>
         </select>
-        <button id="update" class="chartBTN">Update</button>
+        <!-- <button id="updateBtn" class="chartBTN">Update</button> -->
         <button id="randomizeData" class="chartBTN">Randomize Data</button>
     </section>
 </article>
 <script>
+    //---DATA_QUERY----------------------------------
+    const tkrSelect1 = document.getElementById('tkrSelect1');
+    tkrSelect1.addEventListener('change', ()=>{
+        getRandomData(initialDateStr, barData);
+        updateChart();         
+    });
+    //---METADATA----------------------------------
     //---EXPAND COLLAPSE BTNs----------------------------------
-    let queryVIEW = document.getElementById('queryVIEW')
-    let queryVIEWBTN = document.getElementById('queryVIEWBTN')
-    let metadataVIEW = document.getElementById('metadataVIEW')
-    let metadataVIEWBTN = document.getElementById('metadataVIEWBTN')
-    let configVIEW = document.getElementById('configVIEW')
-    let configVIEWBTN = document.getElementById('configVIEWBTN')
+    const queryVIEW = document.getElementById('queryVIEW')
+    const queryVIEWBTN = document.getElementById('queryVIEWBTN')
+    const metadataVIEW = document.getElementById('metadataVIEW')
+    const metadataVIEWBTN = document.getElementById('metadataVIEWBTN')
+    const configVIEW = document.getElementById('configVIEW')
+    const configVIEWBTN = document.getElementById('configVIEWBTN')
+    const chartMaxMinBTN = document.getElementById('chartMaxMinBTN')
     //---END EXPAND COLLAPSE BTNs------------------------------
     /************************************************\
      * - ai_viewz_MATRIX
@@ -182,7 +164,7 @@ padding:1%; margin:1%;box-shadow: inset 0px 0px 4px 0px cyan;">
     //****************************END ai_viewz_matrix    
     const displayQueryView = ()=> {
         if(ai_viewz.query_expanded){
-            queryVIEWBTN.innerHTML = '❇'
+            queryVIEWBTN.innerHTML = '✧'
             queryVIEW.style.display = 'block'
         } else {
             queryVIEWBTN.innerHTML = '✴'
@@ -196,7 +178,7 @@ padding:1%; margin:1%;box-shadow: inset 0px 0px 4px 0px cyan;">
     }    
     const displayMetaDataView = ()=> {
         if(ai_viewz.metadata_expanded){
-            metadataVIEWBTN.innerHTML = '❇'
+            metadataVIEWBTN.innerHTML = '✧'
             metadataVIEW.style.display = 'block'
         } else {
             metadataVIEWBTN.innerHTML = '✴'
@@ -210,7 +192,7 @@ padding:1%; margin:1%;box-shadow: inset 0px 0px 4px 0px cyan;">
     }    
     const displayConfigView = ()=> {
         if(ai_viewz.config_expanded){
-            configVIEWBTN.innerHTML = '❇'
+            configVIEWBTN.innerHTML = '✧'
             configVIEW.style.display = 'block'
         } else {
             configVIEWBTN.innerHTML = '✴'
@@ -223,9 +205,15 @@ padding:1%; margin:1%;box-shadow: inset 0px 0px 4px 0px cyan;">
         displayConfigView(); //RELOAD VIEW. 
     }  
     const minMaxExpandCollapseClick = ()=>{
+        if(!ai_viewz.chart_expanded){
+            chartMaxMinBTN.innerHTML = '✧'
+        } else {
+            chartMaxMinBTN.innerHTML = '✴'
+        }        
         ai_viewz.chart_expanded = !ai_viewz.chart_expanded;
         localStorage.ai_viewz = JSON.stringify(ai_viewz); //SAVE to LOCAL STORAGE 
-        update(); //RELOAD VIEW. 
+        initChart();  //RELOAD VIEW. 
+        updateChart();  //RELOAD VIEW. 
     }        
 </script>
 <script>
@@ -589,42 +577,47 @@ chart_js.Chart.register(CandlestickController, OhlcController, CandlestickElemen
 </script>        
 <!-- <script type="text/javascript" src="./index.js"></script> -->
 <script>
+
+//INIT-------------------------------------------------------
 var barCount = 60;
-var initialDateStr = new Date().toUTCString();
-var ctx = document.getElementById('finChart').getContext('2d');
-ctx.canvas.width = 1000;
-// if(!ai_viewz.chart_expanded){
-//     ctx.canvas.height = 666; //big
-// }else{
-    ctx.canvas.height = 777; //small
-// }
-// let mobileHeight = 666;
-// let defaultHeight = 444;
-// console.log('width:',window.innerWidth)
-// if (window.innerWidth < 768) {
-//   ctx.canvas.height = mobileHeight;
-//   console.log('Render MOBILE')
-// } else {
-//   ctx.canvas.height = defaultHeight;
-//   console.log('Render PC')
-// }
 var barData = new Array(barCount);
-var lineData = new Array(barCount);
-getRandomData(initialDateStr);
-var chart = new Chart(ctx, {
-  type: 'candlestick',
-  data: {
-    datasets: [{
-      label: 'TKR',
-      data: barData,
-    }, {
-      label: 'Close',
-      type: 'line',
-      data: lineData,
-      hidden: true,
-    }]
-  }
-});
+var lineData = new Array(barCount);    
+var initialDateStr = new Date().toUTCString();
+const canvasChart = document.getElementById('finChart'); // Assuming your canvas has an ID 'myChart'
+var chart, chartElem, ctx;
+const initChart = ()=>{
+    let chartElem = Chart.getChart(canvasChart); // Check if a chart already exists on the canvas
+    if (chartElem) {  // Destroy the existing chart if any
+    chartElem.destroy();
+    }
+    ctx = canvasChart.getContext('2d');
+    ctx.canvas.width = 1000;
+    if(!ai_viewz.chart_expanded){ //expand_CHART
+        ctx.canvas.height = 444; //small
+        console.log('Rendering:','small')
+    }else if(ai_viewz.chart_expanded){
+        ctx.canvas.height = 777; //big
+        console.log('Rendering:','big')
+    }else{
+        ctx.canvas.height = 666; //default
+        console.log('Rendering:','default')
+    }
+
+    getRandomData(initialDateStr);
+    chart = new Chart(ctx, {type: 'candlestick',
+    data:{ datasets: [{
+        label: 'TKR',
+        data: barData,
+        }, {
+        label: 'Close',
+        type: 'line',
+        data: lineData,
+        hidden: true,
+        }]
+    }});
+}; initChart();
+
+//UTILITIES---------------------------------------------------------
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -655,40 +648,24 @@ function getRandomData(dateStr) {
     }
   }
 }
-var update = function() {
-    // var ctx = document.getElementById('finChart').getContext('2d');
-    // if(!ai_viewz.chart_expanded){
-    //     ctx.canvas.height = 666; //small
-    // }else{
-    //     ctx.canvas.height = 1666; //big
-    // }
-
-
+//UPDATE----------------------------------------------------------------
+var updateChart = function() {
   var dataset = chart.config.data.datasets[0];
-  // candlestick vs ohlc
-  var type = document.getElementById('type').value;
+  var type = document.getElementById('type').value; // candlestick vs ohlc
   chart.config.type = type;
-  // linear vs log
-  var scaleType = document.getElementById('scale-type').value;
+  var scaleType = document.getElementById('scale-type').value; // linear vs log
   chart.config.options.scales.y.type = scaleType;
-  // color
-  var colorScheme = document.getElementById('color-scheme').value;
+  var colorScheme = document.getElementById('color-scheme').value; // color
+  colorScheme = 'neon'
   if (colorScheme === 'neon') {
     chart.config.data.datasets[0].backgroundColors = {
       up: '#01ff01', //green
       down: '#fe0000', //red
       unchanged: '#999', //white
     };
-  } else {
-    delete chart.config.data.datasets[0].backgroundColors;
-  }
-  // border
-  var border = document.getElementById('border').value;
-  if (border === 'false') {
-    dataset.borderColors = 'rgba(0, 0, 0, 0)';
-  } else {
-    delete dataset.borderColors;
-  }
+  } else { delete chart.config.data.datasets[0].backgroundColors; }
+  var border = document.getElementById('border').value; // border
+  if (border === 'false') { dataset.borderColors = 'rgba(0, 0, 0, 0)'; } else { delete dataset.borderColors;}
   // mixed charts
   var mixed = document.getElementById('mixed').value;
   if (mixed === 'true') {
@@ -698,12 +675,13 @@ var update = function() {
   }
   chart.update();
 };
-[...document.getElementsByTagName('select')].forEach(element => element.addEventListener('change', update));
-document.getElementById('update').addEventListener('click', update);
+[...document.getElementsByTagName('select')].forEach( //updateChart() on each SELECT change
+    element => element.addEventListener('change', updateChart));
+// document.getElementById('updateBtn').addEventListener('click', updateChart);
 document.getElementById('randomizeData').addEventListener('click', function() {
   getRandomData(initialDateStr, barData);
-  update();
-}); update(); //init default
+  updateChart();
+}); updateChart(); //init default
 </script>
 </body>
 </html>
